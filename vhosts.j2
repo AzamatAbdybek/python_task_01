@@ -1,0 +1,13 @@
+{% for vhost in vhosts %}
+<VirtualHost *:{{ vhost.port }}>
+  ServerName {{ vhost.servername }}
+  DocumentRoot {{ vhost.documentroot }}
+  ServerAdmin {{ vhost.serveradmin }}
+  <Directory "{{ vhost.directory }}">
+     AllowOverride {{ vhost.allowoverride }}
+     Options {{ vhost.options }}
+     Order {{ vhost.order }}
+     Allow from {{ vhost.allow }}
+  </Directory>
+</VirtualHost>
+{% endfor %}
