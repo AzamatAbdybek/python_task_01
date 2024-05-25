@@ -3,35 +3,32 @@ from jinja2 import Environment, FileSystemLoader
 import sys
 import os
 
+DATA_FILE = 'data.yml'
+TEMPLATE_FILE = 'vhosts.j2'
+OUTPUT_FILE = 'generated vhosts.conf'
+
 def main():
     try:
-        # Check if data.yml exists and is readable
-        if not os.path.isfile('data.yml'):
-            sys.exit(1)
-        if not os.access('data.yml', os.R_OK):
-            sys.exit(1)
-
-        # Check if vhosts.j2 exists and is readable
-        if not os.path.isfile('vhosts.j2'):
-            sys.exit(1)
-        if not os.access('vhosts.j2', os.R_OK):
-            sys.exit(1)
+        # Check if the files exist and can be opened/read
+        for file in [DATA_FILE, TEMPLATE_FILE]:
+            if not os.path.isfile(file) or not os.access(file, os.R_OK):
+                sys.exit(1)
 
         # Load the YAML data
-        with open('data.yml', 'r') as f:
+        with open(DATA_FILE, 'r') as f:
             data = yaml.safe_load(f)
 
         # Setup Jinja2 environment
         env = Environment(loader=FileSystemLoader('./'), trim_blocks=True, lstrip_blocks=True)
-        template = env.get_template('vhosts.j2')
+        template = env.get_template(TEMPLATE_FILE)
 
-        # Render template using data and write to generated vhosts.conf
+        # Render template using data and write to the output file
         rendered_conf = template.render(vhosts=data['vhosts'])
-        with open('generated vhosts.conf', 'w') as f:
+        with open(OUTPUT_FILE, 'w') as f:
             f.write(rendered_conf)
 
         # Verify the output file is written and readable
-        if not os.path.isfile('generated vhosts.conf') or not os.access('generated generated vhosts.conf', os.R_OK):
+        if not os.path.isfile(OUTPUT_FILE) or not os.access(OUTPUT_FILE, os.R_OK):
             sys.exit(1)
 
     except yaml.YAMLError:
