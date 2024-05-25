@@ -8,11 +8,11 @@ vhosts:
     options: Indexes FollowSymLinks
     order: allow,deny
     allow: all
-  - port: 80
-    servername: www.domain.tld
-    documentroot: /www/domain
-    serveradmin: www-admin@foo.example.com
-    directory: /usr/local/httpd/htdocs
+  - port: 81
+    servername: www.domain1.tld
+    documentroot: /www/domain1
+    serveradmin: www-admin1@foo.example.com
+    directory: /usr/local/httpd/htdocs1
     allowoverride: All
     options: Indexes FollowSymLinks
     order: allow,deny

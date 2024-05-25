@@ -25,13 +25,13 @@ def main():
         env = Environment(loader=FileSystemLoader('./'), trim_blocks=True, lstrip_blocks=True)
         template = env.get_template('vhosts.j2')
 
-        # Render template using data and write to vhosts.conf
+        # Render template using data and write to generated vhosts.conf
         rendered_conf = template.render(vhosts=data['vhosts'])
-        with open('vhosts.conf', 'w') as f:
+        with open('generated vhosts.conf', 'w') as f:
             f.write(rendered_conf)
 
         # Verify the output file is written and readable
-        if not os.path.isfile('vhosts.conf') or not os.access('vhosts.conf', os.R_OK):
+        if not os.path.isfile('generated vhosts.conf') or not os.access('generated generated vhosts.conf', os.R_OK):
             sys.exit(1)
 
     except yaml.YAMLError:
