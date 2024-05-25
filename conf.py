@@ -5,7 +5,7 @@ import os
 
 DATA_FILE = 'data.yml'
 TEMPLATE_FILE = 'vhosts.j2'
-OUTPUT_FILE = 'generated vhosts.conf'
+OUTPUT_FILE = 'vhosts.conf'
 
 def main():
     try:
