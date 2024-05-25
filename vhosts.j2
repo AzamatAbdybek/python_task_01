@@ -2,7 +2,9 @@
 <VirtualHost *:{{ vhost.port }}>
   ServerName {{ vhost.servername }}
   DocumentRoot {{ vhost.documentroot }}
+{% if vhost.serveradmin %}
   ServerAdmin {{ vhost.serveradmin }}
+{% endif %}
   <Directory "{{ vhost.directory }}">
      AllowOverride {{ vhost.allowoverride }}
      Options {{ vhost.options }}
