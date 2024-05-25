@@ -1,4 +1,4 @@
-{% for vhost in vhosts %}
+{% for vhost in vhosts -%}
 <VirtualHost *:{{ vhost.port }}>
   ServerName {{ vhost.servername }}
   DocumentRoot {{ vhost.documentroot }}
@@ -12,5 +12,4 @@
      Allow from {{ vhost.allow }}
   </Directory>
 </VirtualHost>
-
-{% endfor %}
+{%- endfor %}
