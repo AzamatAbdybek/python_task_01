@@ -18,6 +18,16 @@ def main():
         with open(DATA_FILE, 'r') as f:
             data = yaml.safe_load(f)
 
+        # Generate additional vhosts (replace x with the desired number of vhosts)
+        for i in range(1, 10):
+            new_vhost = data['vhosts'][0].copy()
+            new_vhost['port'] += i
+            new_vhost['servername'] = new_vhost['servername'].replace('1', str(i+1))
+            new_vhost['documentroot'] = new_vhost['documentroot'].replace('1', str(i+1))
+            new_vhost['serveradmin'] = new_vhost['serveradmin'].replace('1', str(i+1))
+            new_vhost['directory'] = new_vhost['directory'].replace('1', str(i+1))
+            data['vhosts'].append(new_vhost)
+
         # Setup Jinja2 environment
         env = Environment(loader=FileSystemLoader('./'), trim_blocks=True, lstrip_blocks=True)
         template = env.get_template(TEMPLATE_FILE)
